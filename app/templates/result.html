@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Defect Detection</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f4f7fa;
+            color: #333;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card-header {
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            font-size: 1.5rem;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .card-body {
+            text-align: center;
+        }
+        .def-prediction {
+            font-size: 1.2rem;
+            color: #ff0000;
+        }
+        .prediction {
+            font-size: 1.2rem;
+            color: #28a745;
+        }
+    
+        .no-defects {
+            font-size: 1.2rem;
+            color: #dc3545;
+        }
+        .btn {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        Crop Defect Detection Result
+                    </div>
+                    <div class="card-body">
+                        {% if prediction %}
+                            {%if prediction.label == "defect" %}
+                            <p class="def-prediction">Label: <strong>{{ prediction.label }}</strong></p>
+                            <p class="def-prediction">Score: <strong>{{ prediction.score }}</strong></p>
+                            <p class="def-prediction">A defect has been detected in the crop!</p>
+                            {% endif %}
+                            {%if prediction.label == "healthy" %}
+                            <p class="prediction">Label: <strong>{{ prediction.label }}</strong></p>
+                            <p class="prediction">Score: <strong>{{ prediction.score }}</strong></p>
+                            <p class="prediction">Healthy crop!</p>
+                            {% endif %}
+                        {% else %}
+                            <p class="no-defects">{{ message }}</p>
+                            <p class="text-success">No defects found in the crop!</p>
+                        {% endif %}
+                        <a href="/" class="btn btn-primary">Check Another</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
